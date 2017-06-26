@@ -8,7 +8,7 @@
  
  
  
-# Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+### Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
   
  1- block all incoming connections on all ports : sudo ufw default deny incoming.
@@ -21,13 +21,11 @@
  8- check the firewall status : sudo ufw status.
  
 
-# Step2: Install and configure Apache to serve a Python mod_wsgi application
+### Step2: Install and configure Apache to serve a Python mod_wsgi application
 
  1. Install Apache web server:
+  . ´sudo apt-get install apache2´ 
   
-  ''' 
-       sudo apt-get install apache2 
-   '''
  2. Open a browser and open your public ip address, e.g. 52.28.98.229 ,It should say 'It works!' on the top of the page.
  3.Install mod_wsgi for serving Python apps from Apache and the helper package python-setuptools:
    $ sudo apt-get install python-setuptools libapache2-mod-wsgi
@@ -38,7 +36,7 @@
  6. Enable the new config file:
    $ sudo a2enconf fqdn
    
-# Step2 Install git, clone and setup catalop-app project
+### Step2 Install git, clone and setup catalop-app project
 
  1. Install Git:
    $ sudo apt-get install git
