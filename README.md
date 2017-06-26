@@ -24,7 +24,9 @@
 # Step2: Install and configure Apache to serve a Python mod_wsgi application
 
  1. Install Apache web server:
-   ''' sudo apt-get install apache2 '''
+   ''' 
+   sudo apt-get install apache2 
+   '''
  2. Open a browser and open your public ip address, e.g. 52.28.98.229 ,It should say 'It works!' on the top of the page.
  3.Install mod_wsgi for serving Python apps from Apache and the helper package python-setuptools:
    $ sudo apt-get install python-setuptools libapache2-mod-wsgi
