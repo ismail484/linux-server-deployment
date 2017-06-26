@@ -213,7 +213,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
       sudo apt-get install python-psycopg2```
       
 ### Step-11: Install and configure PostgreSQL DB
-    - Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps) 
+   Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps) 
 1. Install PostgreSQL:
  - `sudo apt-get install postgresql postgresql-contrib` 
 2. Check that no remote connections are allowed (default):
@@ -289,8 +289,9 @@ Allow the user to create database tables:
      
    -   To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
- ### Step-14 :(optional)Install Monitor application Glances
-    Sources:[Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
+ ### Step-14 :(optional)Install Monitor application Glances 
+ 
+   Sources:[Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
     
    - `sudo apt-get install python-pip build-essential python-dev`  
    -  `sudo pip install Glances`  
