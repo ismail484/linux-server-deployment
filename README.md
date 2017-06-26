@@ -129,6 +129,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
    8. Install virtualenv:
      -  `sudo pip install virtualenv`
    9. Set virtual environment to name 'venv':
+        Source [virtualenv ](https://pythontips.com/2013/07/30/what-is-virtualenv/)
      -  `sudo virtualenv venv`
    10. Enable all permissions for the new virtual environment (no sudo should be used within):
      Source: [Stackoverflow](https://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip)
@@ -143,24 +144,25 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
      - `deactivate`
    15. Configure and Enable a New Virtual Host#
    16. Create a virtual host config file
+        Source [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts)
      -  `sudo nano /etc/apache2/sites-available/catalog.conf`
    17. Paste in the following lines of code and change names and addresses regarding your application:  
      ``` <VirtualHost *:80>
-           ServerName PUBLIC-IP-ADDRESS  
-           ServerAdmin admin@PUBLIC-IP-ADDRESS  
-           WSGIScriptAlias / /var/www/catalog/catalog.wsgi  
-           <Directory /var/www/catalog/catalog/>  
-             Order allow,deny  
-             Allow from all  
-           </Directory>  
-           Alias /static /var/www/catalog/catalog/static  
-           <Directory /var/www/catalog/catalog/static/>  
-            Order allow,deny  
-            Allow from all  
-           </Directory>  
-           ErrorLog ${APACHE_LOG_DIR}/error.log  
-           LogLevel warn  
-           CustomLog ${APACHE_LOG_DIR}/access.log combined  
+           ServerName PUBLIC-IP-ADDRESS   
+           ServerAdmin admin@PUBLIC-IP-ADDRESS   
+           WSGIScriptAlias / /var/www/catalog/catalog.wsgi   
+           <Directory /var/www/catalog/catalog/>   
+             Order allow,deny    
+             Allow from all    
+           </Directory>   
+           Alias /static /var/www/catalog/catalog/static   
+           <Directory /var/www/catalog/catalog/static/>   
+            Order allow,deny    
+            Allow from all    
+           </Directory>   
+           ErrorLog ${APACHE_LOG_DIR}/error.log   
+           LogLevel warn   
+           CustomLog ${APACHE_LOG_DIR}/access.log combined   
          </VirtualHost>```  
 18. Enable the virtual host:
  -  `sudo a2ensite catalog`
@@ -288,7 +290,7 @@ Allow the user to create database tables:
    -   To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
  ### Step-14 :(optional)Install Monitor application Glances
-    - Sources: [Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
+    Sources:[Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
     
    - `sudo apt-get install python-pip build-essential python-dev`  
    -  `sudo pip install Glances`  
