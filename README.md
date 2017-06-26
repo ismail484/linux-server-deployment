@@ -41,7 +41,8 @@
  4. change PasswordAuthentication from no to yes.
  5. add AllowUsers grader at end of the file so that we will login through grader.
  6. restart the SSH service : `sudo service ssh restart`
- 7. add custom role on AWS to allow external port 2200 
+ 7. add custom role on AWS to allow external port 2200 .
+ 8. login `ssh -v grader@52.28.98.229 -p 2200`
  
 ### Step-4:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
