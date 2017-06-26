@@ -15,12 +15,11 @@
        finger grader```
  3 Give new user the permission to sudo
    - `sudo visudosudo`
-       
-Add the following line below root ALL...:
-NEWUSER ALL=(ALL:ALL) ALL
-*List all users (Source: Ask Ubuntu):
-$ cut -d: -f1 /etc/passwd
- 
+  4. add the below line of code after root ALL=(ALL:ALL) ALL 
+   -  `grader ALL=(ALL:ALL) ALL `
+  5. You can check the grader entry by below command: 
+     `sudo cat /etc/sudoers`
+  - you can switch from user to other : e.g,`sudo su - grader`
  
 ### Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
