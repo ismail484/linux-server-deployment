@@ -5,7 +5,21 @@
  
  # Configurations
  
+### Step1: User Management: Create a new user (grader)and give user the permission to sudo
+ - Source: [AWS](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html)
  
+ 1. Create a new user:
+  - `adduser grader`
+ 2. To check the User(grader) information :   
+    ```sudo apt-get install finger
+       finger grader```
+ 3 Give new user the permission to sudo
+   - `sudo visudosudo`
+       
+Add the following line below root ALL...:
+NEWUSER ALL=(ALL:ALL) ALL
+*List all users (Source: Ask Ubuntu):
+$ cut -d: -f1 /etc/passwd
  
  
 ### Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
