@@ -54,8 +54,8 @@
    
  ### step4: Setup for deploying a Flask Application on Linux instance Ubuntu 
 
-  1- Extend Python with additional packages that enable Apache to serve Flask applications:__
-     `sudo apt-get install libapache2-mod-wsgi python-dev` __
+  1- Extend Python with additional packages that enable Apache to serve Flask applications:  
+     `sudo apt-get install libapache2-mod-wsgi python-dev`  
   2- Enable mod_wsgi (if not already enabled):
     - sudo a2enmod wsgi
 Create a Flask app:
