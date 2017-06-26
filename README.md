@@ -243,7 +243,8 @@ Allow the user to create database tables:
    - To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
  ### Step :(optional)Install Monitor application Glances
-      - Sources: [Glances](http://glances.readthedocs.io/en/latest/glances-doc.html#introduction):
+ 
+    - Sources: [Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
    - `sudo apt-get install python-pip build-essential python-dev`
    -  `sudo pip install Glances`
    -  `sudo pip install PySensors`
