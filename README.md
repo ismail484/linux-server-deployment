@@ -129,5 +129,110 @@
         application.secret_key = 'Add your secret key' ```  
   
 22. Restart Apache:
- -  sudo service apache2 restart
+  - `sudo service apache2 restart`
+  
+  
+### Step: Clone GitHub repository and make it web inaccessible
 
+ 1. Clone project 3 solution repository on GitHub:
+  - `git clone https://github.com/ismail484/catalog-app` 
+ 2. Move all content of created FSND-P3_Music-Catalog-Web-App directory to /var/www/catalog/catalog/-directory and delete the leftover empty directory.
+ 3. Make the GitHub repository inaccessible:
+Source: Stackoverflow
+ 4. Create and open .htaccess file:
+  - `cd /var/www/catalog/ and $ sudo vim .htaccess`
+ 5. Paste in the following:
+  - `RedirectMatch 404 /\.git`
+  
+### Step: Install needed modules & packages
+
+1. Activate virtual environment:
+  - `source venv/bin/activate`
+2. Install httplib2 module in venv:
+  - `pip install httplib2`
+3. Install requests module in venv:
+  - `pip install requests` 
+4. Install oauth2client.client:
+  - `sudo pip install --upgrade oauth2client` 
+5. Install SQLAlchemy:
+  -  ```pip install flask-sqlalchemy
+        sudo pip install sqlalchemy```
+6. Install the Python PostgreSQL adapter psycopg:
+  -  ```sudo apt-get build-dep python-psycopg
+      sudo apt-get install python-psycopg2```
+      
+### Step: Install and configure PostgreSQL DB
+
+Source: DigitalOcean (alternatively, nice short guide on Kill The Yak as well)
+
+1. Install PostgreSQL:
+ - `sudo apt-get install postgresql postgresql-contrib` 
+2. Check that no remote connections are allowed (default):
+ - `sudo vim /etc/postgresql/9.3/main/pg_hba.conf` 
+3. Open the database setup file:
+ -  `sudo vim database_setup.py`
+4. Change the line starting with "engine" to (fill in a password):
+ - `python engine = create_engine('postgresql://catalog:PW-FOR-DB@localhost/catalog')`
+5. Change the same line in application.py,lotsofmenus.py respectively
+6. Rename application.py:
+ -  `mv application.py __init__.py`
+7. Create needed linux user for psql:
+ - `sudo adduser catalog (choose a password)` 
+8. Change to default user postgres:
+ -  `sudo su - postgres`
+9. Connect to the system:
+ - `psql` 
+10. Add postgre user with password:
+ Sources: Trackets Blog and Super User  
+11. Create user with LOGIN role and set a password:
+ - `# CREATE USER catalog WITH PASSWORD 'PW-FOR-DB'; (# stands for the command prompt in psql)`
+Allow the user to create database tables:
+ - `ALTER USER catalog CREATEDB;`
+12. *List current roles and their attributes:`# \du` 
+13. Create database:
+ - `# CREATE DATABASE catalog WITH OWNER catalog;`
+14.Connect to the database catalog # `\c catalog`
+15. Revoke all rights:
+ - `# REVOKE ALL ON SCHEMA public FROM public;`
+16. Grant only access to the catalog role:
+ - `# GRANT ALL ON SCHEMA public TO catalog;`
+17. Exit out of PostgreSQl and the postgres user:
+ - `# \q, then $ exit`
+19. Create postgreSQL database schema:
+ - `python database_setup.py` 
+ 
+### Step: Run application
+ 
+ 1. Restart Apache:
+  - `sudo service apache2 restart`
+ 2. Open a browser and put in your public ip-address as url, e.g. 52.28.98.229 - if everything works, the application should come up
+ 3. *If getting an internal server error, check the Apache error files:
+  - Source: A2 Hosting
+ 4. View the last 20 lines in the error log: `sudo tail -20 /var/log/apache2/error.log` 
+ 5. If a file like 'g_client_secrets.json' couldn't been found:
+  - Source: Stackoverflow
+  
+ ### Step : Get OAuth-Logins Working
+
+ - Source: Udacity and Apache
+
+ 1. Open http://www.hcidata.info/host2ip.cgi and receive the Host name for your public IP-address, e.g. for 52.28.98.229, its  ec2-52-28-98-229.eu-central-1.compute.amazonaws.com
+ 2. Open the Apache configuration files for the web app: `sudo vim /etc/apache2/sites-available/catalog.conf` 
+ 3. Paste in the following line below ServerAdmin:
+   - `ServerAlias HOSTNAME, e.g. ec2-52-28-98-229.eu-central-1.compute.amazonaws.com`
+ 4. Enable the virtual host:
+  - `sudo a2ensite catalog` 
+ 5. To get the Google+ authorization working:
+  - Go to the project on the Developer Console: https://console.developers.google.com/project
+  - Navigate to APIs & auth > Credentials > Edit Settings
+  -add your host name and public IP-address to your Authorized JavaScript origins and your host name + oauth2callback to   Authorized redirect URIs, e.g. ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback
+ 6. To get the Facebook authorization working:
+   - Go on the Facebook Developers Site to My Apps https://developers.facebook.com/apps/
+   - Click on your App, go to Settings and fill in your public IP-Address including prefixed hhtp:// in the Site URL field
+   - To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
+
+ ### Step :(optional)Install Monitor application Glances
+   - `sudo apt-get install python-pip build-essential python-dev`
+   -  `sudo pip install Glances`
+   -  `sudo pip install PySensors`
+ 
