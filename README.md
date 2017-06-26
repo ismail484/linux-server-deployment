@@ -144,22 +144,22 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
      -  `sudo nano /etc/apache2/sites-available/catalog.conf`
    17. Paste in the following lines of code and change names and addresses regarding your application:  
      ``` <VirtualHost *:80>
-           ServerName PUBLIC-IP-ADDRESS
-           ServerAdmin admin@PUBLIC-IP-ADDRESS
-           WSGIScriptAlias / /var/www/catalog/catalog.wsgi
-           <Directory /var/www/catalog/catalog/>
-             Order allow,deny
-             Allow from all
-           </Directory>
-           Alias /static /var/www/catalog/catalog/static
-           <Directory /var/www/catalog/catalog/static/>
-            Order allow,deny
-            Allow from all
-           </Directory>
-           ErrorLog ${APACHE_LOG_DIR}/error.log
-           LogLevel warn
-           CustomLog ${APACHE_LOG_DIR}/access.log combined
-         </VirtualHost>```
+           ServerName PUBLIC-IP-ADDRESS  
+           ServerAdmin admin@PUBLIC-IP-ADDRESS  
+           WSGIScriptAlias / /var/www/catalog/catalog.wsgi  
+           <Directory /var/www/catalog/catalog/>  
+             Order allow,deny  
+             Allow from all  
+           </Directory>  
+           Alias /static /var/www/catalog/catalog/static  
+           <Directory /var/www/catalog/catalog/static/>  
+            Order allow,deny  
+            Allow from all  
+           </Directory>  
+           ErrorLog ${APACHE_LOG_DIR}/error.log  
+           LogLevel warn  
+           CustomLog ${APACHE_LOG_DIR}/access.log combined  
+         </VirtualHost>```  
 18. Enable the virtual host:
  -  `sudo a2ensite catalog`
 19. Create the .wsgi File and Restart Apache
