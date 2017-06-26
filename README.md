@@ -11,20 +11,21 @@
 ### Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
   
- 1- block all incoming connections on all ports : sudo ufw default deny incoming.
- 2- allow outgoing connections on all ports using sudo ufw default allow outgoing.
- 3- allow incoming connection for SSH(port 2200) using sudo ufw allow 2200/tcp.
- 4- allow incoming connection for HTTP(port 80) using sudo ufw allow 80/tcp.
- 5- allow incoming connection for NTP(port 123) using sudo ufw allow 123/udp.
- 6- check the added rules : sudo ufw show added.
- 7- enable the firewall : sudo ufw enable.
- 8- check the firewall status : sudo ufw status.
+  1.  block all incoming connections on all ports : sudo ufw default deny incoming.
+  2.  allow outgoing connections on all ports using sudo ufw default allow outgoing.
+  3.  allow incoming connection for SSH(port 2200) using sudo ufw allow 2200/tcp.
+  4.  allow incoming connection for HTTP(port 80) using sudo ufw allow 80/tcp.
+  5.  allow incoming connection for NTP(port 123) using sudo ufw allow 123/udp.
+  6.  check the added rules : sudo ufw show added.
+  7.  enable the firewall : sudo ufw enable.
+  8.  check the firewall status : sudo ufw status.
  
 
 ### Step2: Install and configure Apache to serve a Python mod_wsgi application
 
  1. Install Apache web server:
-  . ´sudo apt-get install apache2´ 
+  . `sudo apt-get install apache2` 
+   `git status`
   
  2. Open a browser and open your public ip address, e.g. 52.28.98.229 ,It should say 'It works!' on the top of the page.
  3.Install mod_wsgi for serving Python apps from Apache and the helper package python-setuptools:
