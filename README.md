@@ -54,66 +54,71 @@
    
  ### step4: Setup for deploying a Flask Application on Linux instance Ubuntu 
 
-  1- Extend Python with additional packages that enable Apache to serve Flask applications:  
-     `sudo apt-get install libapache2-mod-wsgi python-dev`  
-  2- Enable mod_wsgi (if not already enabled):
-    - sudo a2enmod wsgi
-Create a Flask app:
-Move to the www directory:
-$ cd /var/www
-Setup a directory for the app, e.g. catalog:
-$ sudo mkdir catalog
-$ cd catalog and $ sudo mkdir catalog
-$ cd catalog and $ sudo mkdir static templates
-Create the file that will contain the flask application logic:
-$ sudo nano __init__.py
-Paste in the following code:
-python from flask import Flask app = Flask(__name__) @app.route("/") def hello(): return "Veni vidi vici!!" if __name__ == "__main__": app.run()
-Install Flask
-Install pip installer:
-$ sudo apt-get install python-pip
-Install virtualenv:
-$ sudo pip install virtualenv
-Set virtual environment to name 'venv':
-$ sudo virtualenv venv
-Enable all permissions for the new virtual environment (no sudo should be used within):
-Source: Stackoverflow
-$ sudo chmod -R 777 venv
-Activate the virtual environment:
-$ source venv/bin/activate
-Install Flask inside the virtual environment:
-$ pip install Flask
-Run the app:
-$ python __init__.py
-Deactivate the environment:
-$ deactivate
-Configure and Enable a New Virtual Host#
-Create a virtual host config file
-$ sudo nano /etc/apache2/sites-available/catalog.conf
-Paste in the following lines of code and change names and addresses regarding your application:
-  <VirtualHost *:80>
-      ServerName PUBLIC-IP-ADDRESS
-      ServerAdmin admin@PUBLIC-IP-ADDRESS
-      WSGIScriptAlias / /var/www/catalog/catalog.wsgi
-      <Directory /var/www/catalog/catalog/>
-          Order allow,deny
-          Allow from all
-      </Directory>
-      Alias /static /var/www/catalog/catalog/static
-      <Directory /var/www/catalog/catalog/static/>
-          Order allow,deny
-          Allow from all
-      </Directory>
-      ErrorLog ${APACHE_LOG_DIR}/error.log
-      LogLevel warn
-      CustomLog ${APACHE_LOG_DIR}/access.log combined
-  </VirtualHost>
-Enable the virtual host:
-$ sudo a2ensite catalog
-Create the .wsgi File and Restart Apache
-Create wsgi file:
-$ cd /var/www/catalog and $ sudo vim catalog.wsgi
-Paste in the following lines of code:
+  1. Extend Python with additional packages that enable Apache to serve Flask applications:  
+    - `sudo apt-get install libapache2-mod-wsgi python-dev`  
+  2. Enable mod_wsgi (if not already enabled):
+    - `sudo a2enmod wsgi`
+   Create a Flask app:
+  3. Move to the www directory:
+    - `cd /var/www`
+  4. Setup a directory for the app, e.g. catalog:
+    -  ```sudo mkdir catalog  
+          cd catalog
+          sudo mkdir catalog
+          cd catalog
+          sudo mkdir static templates ```  
+  5.  Create the file that will contain the flask application logic:
+   - `sudo nano __init__.py` 
+  6. Paste in the following code:
+    - ```#!/usr/bin/python
+         from flask import Flask app = Flask(__name__)
+         @app.route("/") def hello(): 
+         return "Hello,world" 
+         if __name__ == "__main__": 
+         app.run() ``` 
+   7. Install pip installer:
+      - `sudo apt-get install python-pip`
+   8. Install virtualenv:
+      -  `sudo pip install virtualenv`
+   9. Set virtual environment to name 'venv':
+      -  `sudo virtualenv venv`
+   10. Enable all permissions for the new virtual environment (no sudo should be used within):
+     - `sudo chmod -R 777 venv` 
+   11. Activate the virtual environment:
+     -  `source venv/bin/activate`
+   12. Install Flask inside the virtual environment:
+     - `pip install Flask` 
+   13. Run the app:
+     - `python __init__.py` 
+   14. Deactivate the environment:
+      - `deactivate`
+   15. Configure and Enable a New Virtual Host#
+   16. Create a virtual host config file
+      -  `sudo nano /etc/apache2/sites-available/catalog.conf`
+   17. Paste in the following lines of code and change names and addresses regarding your application:  
+     ``` <VirtualHost *:80>
+           ServerName PUBLIC-IP-ADDRESS
+           ServerAdmin admin@PUBLIC-IP-ADDRESS
+           WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+           <Directory /var/www/catalog/catalog/>
+             Order allow,deny
+             Allow from all
+           </Directory>
+           Alias /static /var/www/catalog/catalog/static
+           <Directory /var/www/catalog/catalog/static/>
+            Order allow,deny
+            Allow from all
+           </Directory>
+           ErrorLog ${APACHE_LOG_DIR}/error.log
+           LogLevel warn
+           CustomLog ${APACHE_LOG_DIR}/access.log combined
+         </VirtualHost>```
+18. Enable the virtual host:
+ -  `sudo a2ensite catalog`
+19. Create the .wsgi File and Restart Apache
+20. Create wsgi file:
+  - `cd /var/www/catalog and $ sudo vim catalog.wsgi` 
+21. Paste in the following lines of code:
   #!/usr/bin/python
   import sys
   import logging
