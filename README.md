@@ -20,8 +20,29 @@
   5. You can check the grader entry by below command: 
      `sudo cat /etc/sudoers`
   - you can switch from user to other : e.g,`sudo su - grader`
+  
+### Step-2: Follow the instructions provided to authenticated SSH from local server into Aws instance
+  1. from local server create authentication key :
+    - `ssh-keygen`
+    - `cat .ssh/id_rsa.pub `
+  2. from AWS instace on the new user (grader), get the same authentication key:
+   - ```mkdir .ssh
+        chmod 700 .ssh
+        touch .ssh/authorized_keys
+        chmod 600 .ssh/authorized_keys
+        sudo vi .ssh/authorized_keys```
+        paste the key from point (1) then save
+   
+### Step-3 : Change the SSH port from 22 to 2200
+
+ 1. Edit :` nano /etc/ssh/sshd_config`
+ 2. change port from 22 to 2200
+ 3. change PermitRootLogin without-password to PermitRootLogin no . it is disable root login.
+ 4. change PasswordAuthentication from no to yes.
+ 5. add AllowUsers grader at end of the file so that we will login through grader.
+ 6. restart the SSH service : `sudo service ssh restart`
  
-### Step1:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+### Step-4:Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
   
   1.  block all incoming connections on all ports :
@@ -41,7 +62,7 @@
   8.  check the firewall status : 
      - `sudo ufw status`
      
- ### Step2: Configure the local timezone to UTC
+ ### Step-5: Configure the local timezone to UTC
 
    Source: [Ubuntu documentation](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29)
 
@@ -54,7 +75,7 @@
   - Open the NTP configuration file:`sudo vim /etc/ntp.conf`
 Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and replace the given servers with the new server list.
 
-### Step2: Install and configure LAMP Apache to serve a Python mod_wsgi application
+### Step-6: Install and configure LAMP Apache to serve a Python mod_wsgi application
    - Source: [Udacity](http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html)
  1. Install Apache web server:
      - `sudo apt-get install apache2` 
@@ -68,7 +89,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
  6. Enable the new config file:
      -  `sudo a2enconf fqdn`
    
-### Step3 Install git, clone and setup catalop-app project
+### Step-7 Install git, clone and setup catalop-app project
  - Source: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux)
  1. Install Git:
      -  `sudo apt-get install git`
@@ -77,7 +98,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
  3.  Set up your email address to connect your commits to your account:
      -  `git config --global user.email "YOUR EMAIL ADDRESS"`
    
- ### step4: Setup for deploying a Flask Application on Linux instance Ubuntu 
+ ### step-8: Setup for deploying a Flask Application on Linux instance Ubuntu 
   Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
   1. Extend Python with additional packages that enable Apache to serve Flask applications:  
      - `sudo apt-get install libapache2-mod-wsgi python-dev`  
@@ -158,7 +179,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
   - `sudo service apache2 restart`
   
   
-### Step: Clone GitHub repository and make it web inaccessible
+### Step-9: Clone GitHub repository and make it web inaccessible
 
  1. Clone project 3 solution repository on GitHub:
   - `git clone https://github.com/ismail484/catalog-app` 
@@ -170,7 +191,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
  5. Paste in the following:
   - `RedirectMatch 404 /\.git`
   
-### Step: Install needed modules & packages
+### Step-10: Install needed modules & packages
 
 1. Activate virtual environment:
   - `source venv/bin/activate`
@@ -187,7 +208,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
   -  ```sudo apt-get build-dep python-psycopg
       sudo apt-get install python-psycopg2```
       
-### Step: Install and configure PostgreSQL DB
+### Step-11: Install and configure PostgreSQL DB
     - Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps) 
 1. Install PostgreSQL:
  - `sudo apt-get install postgresql postgresql-contrib` 
@@ -225,7 +246,7 @@ Allow the user to create database tables:
 19. Create postgreSQL database schema:
  - `python database_setup.py` 
  
-### Step: Run application
+### Step-12: Run application
  
  1. Restart Apache:
   - `sudo service apache2 restart`
@@ -236,7 +257,7 @@ Allow the user to create database tables:
  5. If a file like 'g_client_secrets.json' couldn't been found:
   - Source: [Stackoverflow](https://stackoverflow.com/questions/12201928/python-open-method-ioerror-errno-2-no-such-file-or-directory)
   
- ### Step : Get OAuth-Logins Working
+ ### Step-13 : Get OAuth-Logins Working
 
  - Source: [Udacity Forum](https://discussions.udacity.com/t/oauth-provider-callback-uris/20460) and [Apache](http://httpd.apache.org/docs/2.2/en/vhosts/name-based.html)
 
@@ -255,7 +276,7 @@ Allow the user to create database tables:
    - Click on your App, go to Settings and fill in your public IP-Address including prefixed hhtp:// in the Site URL field
    - To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
- ### Step :(optional)Install Monitor application Glances
+ ### Step-14 :(optional)Install Monitor application Glances
  
     - Sources: [Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
    - `sudo apt-get install python-pip build-essential python-dev`
