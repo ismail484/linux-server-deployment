@@ -3,7 +3,7 @@
 # Description
  - it's  a baseline installation of a Linux server and prepare it to host my  web application (catalog-app). the project includes  security server  configurations against  a number of attack vectors, also includes installation  a database server configuration (Postgres), and deploy one of my existing web application (catalog-app) onto it.
  
-#### - Simply open [CatalogApp](http://52.28.98.229/), and login using your Facebook or Google+ account , and create your favourite Sports Catalog .
+#### -  Simply open [CatalogApp](http://52.28.98.229/), and login using your Facebook or Google+ account , and create your favourite Sports Catalog .
  # Configurations
  
 ### Step1: User Management: Create a new user (grader)and give user the permission to sudo
