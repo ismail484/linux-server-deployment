@@ -41,11 +41,11 @@
   - Open the NTP configuration file:`sudo vim /etc/ntp.conf`
 Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and replace the given servers with the new server list.
 
-### Step2: Install and configure Apache to serve a Python mod_wsgi application
-
+### Step2: Install and configure LAMP Apache to serve a Python mod_wsgi application
+   - Source: [Udacity](http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html)
  1. Install Apache web server:
      - `sudo apt-get install apache2` 
- 2. Open a browser and open your public ip address, e.g. 52.28.98.229 ,It should say 'It works!' on the top of the page.
+ 2. Open a browser and open your public ip address, e.g. http://52.28.98.229 ,It should say 'It works!' on the top of the page.
  3.Install mod_wsgi for serving Python apps from Apache and the helper package python-setuptools:
      -  `sudo apt-get install python-setuptools libapache2-mod-wsgi`
  4. Restart the Apache server for mod_wsgi to load:
@@ -56,7 +56,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
      -  `sudo a2enconf fqdn`
    
 ### Step3 Install git, clone and setup catalop-app project
-
+ - Source: [GitHub](https://help.github.com/articles/set-up-git/#platform-linux)
  1. Install Git:
      -  `sudo apt-get install git`
  2. Set your name, e.g. for the commits:
@@ -65,7 +65,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
      -  `git config --global user.email "YOUR EMAIL ADDRESS"`
    
  ### step4: Setup for deploying a Flask Application on Linux instance Ubuntu 
-
+  Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
   1. Extend Python with additional packages that enable Apache to serve Flask applications:  
      - `sudo apt-get install libapache2-mod-wsgi python-dev`  
   2. Enable mod_wsgi (if not already enabled):
@@ -95,6 +95,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
    9. Set virtual environment to name 'venv':
      -  `sudo virtualenv venv`
    10. Enable all permissions for the new virtual environment (no sudo should be used within):
+     Source: [Stackoverflow](https://stackoverflow.com/questions/14695278/python-packages-not-installing-in-virtualenv-using-pip)
      - `sudo chmod -R 777 venv` 
    11. Activate the virtual environment:
      -  `source venv/bin/activate`
@@ -150,7 +151,7 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
   - `git clone https://github.com/ismail484/catalog-app` 
  2. Move all content of created FSND-P3_Music-Catalog-Web-App directory to /var/www/catalog/catalog/-directory and delete the leftover empty directory.
  3. Make the GitHub repository inaccessible:
-Source: Stackoverflow
+  - Source:[Stackoverflow](https://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible)
  4. Create and open .htaccess file:
   - `cd /var/www/catalog/ and $ sudo vim .htaccess`
  5. Paste in the following:
@@ -174,9 +175,7 @@ Source: Stackoverflow
       sudo apt-get install python-psycopg2```
       
 ### Step: Install and configure PostgreSQL DB
-
-Source: DigitalOcean (alternatively, nice short guide on Kill The Yak as well)
-
+    - Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps) 
 1. Install PostgreSQL:
  - `sudo apt-get install postgresql postgresql-contrib` 
 2. Check that no remote connections are allowed (default):
@@ -195,7 +194,7 @@ Source: DigitalOcean (alternatively, nice short guide on Kill The Yak as well)
 9. Connect to the system:
  - `psql` 
 10. Add postgre user with password:
- Sources: Trackets Blog and Super User  
+   - Sources: [Trackets Blog](http://blog.trackets.com/2013/08/19/postgresql-basics-by-example.html) and [Super User](https://superuser.com/questions/769749/creating-user-with-password-or-changing-password-doesnt-work-in-postgresql)  
 11. Create user with LOGIN role and set a password:
  - `# CREATE USER catalog WITH PASSWORD 'PW-FOR-DB'; (# stands for the command prompt in psql)`
 Allow the user to create database tables:
@@ -219,14 +218,14 @@ Allow the user to create database tables:
   - `sudo service apache2 restart`
  2. Open a browser and put in your public ip-address as url, e.g. 52.28.98.229 - if everything works, the application should come up
  3. *If getting an internal server error, check the Apache error files:
-  - Source: A2 Hosting
+  - Source: [A2 Hosting](https://www.a2hosting.com/kb/developer-corner/apache-web-server/viewing-apache-log-files)
  4. View the last 20 lines in the error log: `sudo tail -20 /var/log/apache2/error.log` 
  5. If a file like 'g_client_secrets.json' couldn't been found:
-  - Source: Stackoverflow
+  - Source: [Stackoverflow](https://stackoverflow.com/questions/12201928/python-open-method-ioerror-errno-2-no-such-file-or-directory)
   
  ### Step : Get OAuth-Logins Working
 
- - Source: Udacity and Apache
+ - Source: [Udacity Forum](https://discussions.udacity.com/t/oauth-provider-callback-uris/20460) and [Apache](http://httpd.apache.org/docs/2.2/en/vhosts/name-based.html)
 
  1. Open http://www.hcidata.info/host2ip.cgi and receive the Host name for your public IP-address, e.g. for 52.28.98.229, its  ec2-52-28-98-229.eu-central-1.compute.amazonaws.com
  2. Open the Apache configuration files for the web app: `sudo vim /etc/apache2/sites-available/catalog.conf` 
@@ -237,13 +236,14 @@ Allow the user to create database tables:
  5. To get the Google+ authorization working:
   - Go to the project on the Developer Console: https://console.developers.google.com/project
   - Navigate to APIs & auth > Credentials > Edit Settings
-  -add your host name and public IP-address to your Authorized JavaScript origins and your host name + oauth2callback to   Authorized redirect URIs, e.g. ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback
+  -add your host name and public IP-address to your Authorized JavaScript origins and your host name + oauth2callback to   Authorized redirect URIs, e.g. http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback
  6. To get the Facebook authorization working:
    - Go on the Facebook Developers Site to My Apps https://developers.facebook.com/apps/
    - Click on your App, go to Settings and fill in your public IP-Address including prefixed hhtp:// in the Site URL field
    - To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
  ### Step :(optional)Install Monitor application Glances
+      - Sources: [Glances](http://glances.readthedocs.io/en/latest/glances-doc.html#introduction):
    - `sudo apt-get install python-pip build-essential python-dev`
    -  `sudo pip install Glances`
    -  `sudo pip install PySensors`
