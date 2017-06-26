@@ -27,7 +27,19 @@
      - `sudo ufw enable`
   8.  check the firewall status : 
      - `sudo ufw status`
- 
+     
+ ### Step2: Configure the local timezone to UTC
+
+   Source: [Ubuntu documentation](https://help.ubuntu.com/community/UbuntuTime#Using_the_Command_Line_.28terminal.29)
+
+  1. Open the timezone selection dialog:
+   -  `sudo dpkg-reconfigure tzdata`
+  2. Then chose 'None of the above', then UTC.
+   - *Setup the ntp daemon ntpd for regular and improving time sync:
+   `sudo apt-get install ntp` 
+ 3. *Chose closer NTP time servers:
+  - Open the NTP configuration file:`sudo vim /etc/ntp.conf`
+Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and replace the given servers with the new server list.
 
 ### Step2: Install and configure Apache to serve a Python mod_wsgi application
 
