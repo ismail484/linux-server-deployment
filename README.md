@@ -149,8 +149,9 @@ Open http://www.pool.ntp.org/en/ and choose the pool zone closest to you and rep
      -  `sudo nano /etc/apache2/sites-available/catalog.conf`
    17. Paste in the following lines of code and change names and addresses regarding your application:  
      ``` <VirtualHost *:80>
-           ServerName PUBLIC-IP-ADDRESS   
-           ServerAdmin admin@PUBLIC-IP-ADDRESS   
+           ServerName 52.28.98.229   
+           ServerAdmin grader@52.28.98.229
+           ServerAlias ec2-52-28-98-229.eu-central-1.compute.amazonaws.com
            WSGIScriptAlias / /var/www/catalog/catalog.wsgi   
            <Directory /var/www/catalog/catalog/>   
              Order allow,deny    
