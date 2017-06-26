@@ -2,7 +2,7 @@
 
 # Description
  - it's  a baseline installation of a Linux server and prepare it to host my  web application (catalog-app). the project includes  security server  configurations against  a number of attack vectors, also includes installation  a database server configuration (Postgres), and deploy one of my existing web application (catalog-app) onto it.
- 
+ - Simply open [CatalogApp](http://52.28.98.229/), and login using your Facebook or Google+ account .
  # Configurations
  
 ### Step1: User Management: Create a new user (grader)and give user the permission to sudo
@@ -270,17 +270,26 @@ Allow the user to create database tables:
  4. Enable the virtual host:
   - `sudo a2ensite catalog` 
  5. To get the Google+ authorization working:
-  - Go to the project on the Developer Console: https://console.developers.google.com/project
-  - Navigate to APIs & auth > Credentials > Edit Settings
+  a.  Go to the project on the Developer Console: https://console.developers.google.com/project
+  b.  Navigate to APIs & auth > Credentials > Edit Settings
+  c.  add in Credentials Tab :"javascript_origins":"http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com","http://52.28.98.229"
+  "redirect_uris":["http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback"],
+  d. . add in your key_secrets file(client_secrets.json):"javascript_origins":"http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com",
+  "redirect_uris":["http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback","http://52.28.98.229"],
   -add your host name and public IP-address to your Authorized JavaScript origins and your host name + oauth2callback to   Authorized redirect URIs, e.g. http://ec2-52-28-98-229.eu-central-1.compute.amazonaws.com/oauth2callback
  6. To get the Facebook authorization working:
-   - Go on the Facebook Developers Site to My Apps https://developers.facebook.com/apps/
+   - Go on the Facebook Developers Site to My Apps https://developers.facebook.com/apps/ .
    - Click on your App, go to Settings and fill in your public IP-Address including prefixed hhtp:// in the Site URL field
-   - To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
+   -in  Client OAuth Settings add
+     a. Web Ip e.g,http://52.28.98.229/ ,http://52.28.98.229/login
+     b. Web Ip authenticated e.g,http://52.28.98.229/_oauth/facebook
+     c. add in your secret keys(fb_client_secrets.json):  "redirect_uri" :["http://52.28.98.229/login","http://52.28.98.229/","http://52.28.98.229/_oauth/facebook"]
+     
+  -  To leave the development mode, so others can login as well, also fill in a contact email address in the respective field, "Save Changes", click on 'Status & Review'
 
  ### Step-14 :(optional)Install Monitor application Glances
- 
     - Sources: [Glances](https://www.maketecheasier.com/glances-monitor-system-ubuntu/):
+    
    - `sudo apt-get install python-pip build-essential python-dev`
    -  `sudo pip install Glances`
    -  `sudo pip install PySensors`
