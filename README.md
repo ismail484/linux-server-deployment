@@ -12,8 +12,8 @@
  1. Create a new user:
   - `adduser grader`
  2. To check the User(grader) information :   
-    ```sudo apt-get install finger
-       finger grader```
+    ``` sudo apt-get install finger  
+       finger grader ```
  3 Give new user the permission to sudo
    - `sudo visudosudo`
   4. add the below line of code after root ALL=(ALL:ALL) ALL 
